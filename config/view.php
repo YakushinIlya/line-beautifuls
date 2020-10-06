@@ -33,4 +33,7 @@ return [
         realpath(storage_path('framework/views'))
     ),
 
+    'logo' => '/frontend/media/img/logo.png',
+    'phone' => '+7 (900) 083-18-57',
+
 ];

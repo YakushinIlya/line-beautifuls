@@ -1,0 +1,24 @@
+header {
+    height: 90px;
+    padding-top: 15px;
+}
+.header .header__logo, .header .header__phone {
+    text-align: center;
+}
+.header .header__phone span {
+    color: #000000;
+    font-weight: bold;
+    font-size: 120%;
+}
+header nav a {
+    color: #000000;
+    font-weight: bold;
+}
+header nav a:hover {
+    color: #313131;
+    font-weight: bold;
+}
+
+section.slider {
+    margin-top: 25px;
+}
