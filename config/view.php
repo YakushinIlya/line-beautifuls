@@ -36,4 +36,9 @@ return [
     'logo' => '/frontend/media/img/logo.png',
     'phone' => '+7 (900) 083-18-57',
 
+    'error404' => [
+        'head' => 'Ошибка 404!',
+        'message' => 'Страница не найдена.',
+    ],
+
 ];

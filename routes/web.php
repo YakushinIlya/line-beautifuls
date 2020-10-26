@@ -13,10 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::group([
+    'prefix'=>'adminlb',
+    'namespace' => 'Admin',
+    'middleware' => ['auth'],
+], function(){
+    Route::get('/', 'AdminController@panel')->name('adminPanel');
+
+    Route::get('/pages', 'PagesController@index')->name('adminPages');
+    Route::match(['get', 'post'],'/page/create', 'PagesController@pageCreate')->name('adminPageCreate');
+
+    Route::get('/slider', 'SliderController@index')->name('adminSlider');
+    Route::get('/news', 'NewsController@index')->name('adminNews');
+    Route::get('/services', 'ServicesController@index')->name('adminServices');
+    Route::get('/privilege', 'PrivilegeController@index')->name('adminPrivilege');
+    Route::get('/media', 'MediaController@index')->name('adminMedia');
+    Route::get('/contacts', 'ContactsController@index')->name('adminContacts');
+});
+
+Route::get('/{page}', 'PagesController@index')->where('page', '[A-Za-z0-9-_]+')->name('page');
+Route::get('/error/{num}', 'PagesController@error')->where('num', '[0-9]+')->name('error');

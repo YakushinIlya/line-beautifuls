@@ -1,0 +1,1 @@
+<a href="{{route('adminPageCreate')}}" class="btn btn-success">Добавить страницу</a>

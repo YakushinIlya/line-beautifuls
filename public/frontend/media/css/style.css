@@ -1,8 +1,21 @@
+html {
+    background: #ffd5d6;
+}
+body {
+    max-width: 1200px;
+    margin: auto;
+    background: #ffffff;
+}
+
 header {
     height: 90px;
     padding-top: 15px;
+    margin-bottom: 50px;
 }
-.header .header__logo, .header .header__phone {
+.header .header__logo,
+.header .header__phone,
+.footer .footer__logo,
+.footer .footer__phone {
     text-align: center;
 }
 .header .header__phone span {
@@ -20,5 +33,81 @@ header nav a:hover {
 }
 
 section.slider {
-    margin-top: 25px;
+    padding-top: 25px;
+}
+section.caruseilList h1,
+section.services h1,
+section.portfolio h1 {
+    text-align: center;
+}
+
+.caruseilList .carousel-control-next,
+.caruseilList .carousel-control-prev {
+    width: auto !important;
+    background: #313131;
+}
+.caruseilList .carousel-inner {
+    width: 95% !important;
+    margin: auto;
+    display: block;
+}
+.caruseilList .card,
+.services .card,
+.privilege .card {
+    border: none;
+    background: none;
+}
+
+section.privilege {
+    background: #fff1f1;
+    margin: 50px 0px 50px 0px;
+    padding: 25px;
+    text-align: center;
+}
+.privilege .card img {
+    max-height: 100px !important;
+    max-width: 100px !important;
+    display: block;
+    margin: 0px auto 0px auto;
+}
+
+section.portfolio {
+    margin-bottom: 50px;
+}
+section.portfolio .nav-link {
+    font-weight: bold;
+    font-size: 120%;
+    color: #e60c8d;
+}
+
+section.page {
+    font-size: 120%;
+}
+
+section.footer {
+    padding: 25px;
+    background: #313131;
+    margin-top: 50px;
+}
+footer nav a {
+    color: #ffffff;
+    font-weight: bold;
+}
+footer nav a:hover {
+    color: #cccccc;
+    font-weight: bold;
+}
+.footer .footer__phone span {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 120%;
+}
+footer h5 {
+    color: #ffdbdb;
+    text-align: center;
+}
+footer .social img {
+    max-width: 150px;
+    display: block;
+    margin: 15px auto 10px auto;
 }
