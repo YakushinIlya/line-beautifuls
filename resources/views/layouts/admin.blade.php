@@ -9,7 +9,72 @@
     <link rel="stylesheet" href="/frontend/media/css/all.min.css">
     <link rel="stylesheet" href="/backend/media/css/dashboard.css">
     <link rel="stylesheet" href="/backend/media/css/style.css">
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.tiny.cloud/1/35fwwbnhirflx3s8m4jg0atfen3af8rg5u6oa6u126lalwut/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript">
+        function example_image_upload_handler (blobInfo, success, failure, progress) {
+            var xhr, formData;
+
+            xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '/api/v1/uploads');
+
+            xhr.upload.onprogress = function (e) {
+                progress(e.loaded / e.total * 100);
+            };
+
+            xhr.onload = function() {
+                var json;
+
+                if (xhr.status === 403) {
+                    failure('HTTP Error: ' + xhr.status, { remove: true });
+                    return;
+                }
+
+                if (xhr.status < 200 || xhr.status >= 300) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                }
+
+                json = JSON.parse(xhr.responseText);
+
+                if (!json || typeof json.location != 'string') {
+                    failure('Invalid JSON: ' + xhr.responseText);
+                    return;
+                }
+
+                success(json.location);
+            };
+
+            xhr.onerror = function () {
+                failure('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+            };
+
+            formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+            xhr.send(formData);
+        };
+
+        tinyMCE.init({
+            // General options
+            mode : "exact",
+            elements: 'body',
+            language: 'ru',
+            plugins: [
+                "image","code","autoresize","media","link","imagetools"],
+            default_link_target: "_blank",
+            images_upload_handler: example_image_upload_handler,
+            automatic_uploads: true,
+            content_css: '/backend/media/css/tinymce.css',
+            body_id: 'new-journal-editor',
+            height : "300",
+            toolbar1: "insertfile undo | redo | styleselect | bold | italic | alignleft | aligncenter | alignright | alignjustify | bullist | numlist | outdent | indent | link | image | media | code",
+            toolbar2: "",
+            menubar : false,
+            statusbar : false,
+            convert_urls: false,
+        });
+    </script>
 </head>
 <body class="d-flex flex-column h-100">
 

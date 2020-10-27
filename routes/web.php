@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+
 
 Route::get('/', 'HomeController@index')->name('home');
 
@@ -26,6 +26,8 @@ Route::group([
 
     Route::get('/pages', 'PagesController@index')->name('adminPages');
     Route::match(['get', 'post'],'/page/create', 'PagesController@pageCreate')->name('adminPageCreate');
+    Route::match(['get', 'post'],'/page/update/{id?}', 'PagesController@pageUpdate')->name('adminPageUpdate');
+    Route::get('/page/delete/{id}', 'PagesController@pageDelete')->name('adminPageDelete');
 
     Route::get('/slider', 'SliderController@index')->name('adminSlider');
     Route::get('/news', 'NewsController@index')->name('adminNews');
@@ -37,3 +39,5 @@ Route::group([
 
 Route::get('/{page}', 'PagesController@index')->where('page', '[A-Za-z0-9-_]+')->name('page');
 Route::get('/error/{num}', 'PagesController@error')->where('num', '[0-9]+')->name('error');
+
+Auth::routes();

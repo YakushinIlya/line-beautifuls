@@ -1,12 +1,13 @@
 @extends('layouts.auth')
 
 @section('content')
-    <form class="form-signin">
+    <form class="form-signin" method="post" action="{{route('login')}}">
+        @csrf
         <img class="mb-4" src="{{config('view.logo')}}" alt="" width="100%">
         <label for="inputEmail" class="sr-only">E-mail</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Введите email администратора" required autofocus>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Введите email администратора" required autofocus>
         <label for="inputPassword" class="sr-only">Пароль</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Введите пароль администратора" required>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Введите пароль администратора" required>
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me" checked> Запомнить меня
