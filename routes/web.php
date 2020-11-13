@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+//Route::get('/{page}', 'PagesController@index')->where('page', '[A-Za-z0-9-_]+')->name('page');
+
 Route::group([
     'prefix'=>'adminlb',
     'namespace' => 'Admin',
     'middleware' => ['auth'],
 ], function(){
-    Route::get('/', 'AdminController@panel')->name('adminPanel');
+    Route::get('/panel', 'AdminController@panel')->name('adminPanel');
 
     Route::get('/pages', 'PagesController@index')->name('adminPages');
     Route::match(['get', 'post'],'/page/create', 'PagesController@pageCreate')->name('adminPageCreate');
@@ -30,14 +32,20 @@ Route::group([
     Route::get('/page/delete/{id}', 'PagesController@pageDelete')->name('adminPageDelete');
 
     Route::get('/slider', 'SliderController@index')->name('adminSlider');
+    Route::match(['get', 'post'],'/slider/update/', 'SliderController@sliderUpdate')->name('adminSliderUpdate');
+    Route::get('/slider/delete/{id}', 'SliderController@sliderDelete')->name('adminSliderDelete');
+
     Route::get('/news', 'NewsController@index')->name('adminNews');
+    Route::match(['get', 'post'],'/new/create', 'NewsController@newCreate')->name('adminNewCreate');
+    Route::match(['get', 'post'],'/new/update/{id?}', 'NewsController@newUpdate')->name('adminNewUpdate');
+    Route::get('/new/delete/{id}', 'NewsController@newDelete')->name('adminNewDelete');
+
     Route::get('/services', 'ServicesController@index')->name('adminServices');
     Route::get('/privilege', 'PrivilegeController@index')->name('adminPrivilege');
     Route::get('/media', 'MediaController@index')->name('adminMedia');
     Route::get('/contacts', 'ContactsController@index')->name('adminContacts');
 });
 
-Route::get('/{page}', 'PagesController@index')->where('page', '[A-Za-z0-9-_]+')->name('page');
 Route::get('/error/{num}', 'PagesController@error')->where('num', '[0-9]+')->name('error');
 
 Auth::routes();
