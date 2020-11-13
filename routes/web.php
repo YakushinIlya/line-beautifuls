@@ -41,6 +41,10 @@ Route::group([
     Route::get('/new/delete/{id}', 'NewsController@newDelete')->name('adminNewDelete');
 
     Route::get('/services', 'ServicesController@index')->name('adminServices');
+    Route::match(['get', 'post'],'/services/create', 'ServicesController@serviceCreate')->name('adminServicesCreate');
+    Route::match(['get', 'post'],'/services/update/{id?}', 'ServicesController@serviceUpdate')->name('adminServicesUpdate');
+    Route::get('/services/delete/{id}', 'ServicesController@serviceDelete')->name('adminServicesDelete');
+
     Route::get('/privilege', 'PrivilegeController@index')->name('adminPrivilege');
     Route::get('/media', 'MediaController@index')->name('adminMedia');
     Route::get('/contacts', 'ContactsController@index')->name('adminContacts');
